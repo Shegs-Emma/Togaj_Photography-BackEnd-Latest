@@ -1,5 +1,6 @@
 const   express     = require('express'),
         app         = express(),
+        fileUpload  = require('express-fileupload'),
         bodyParser  = require('body-parser'),
         mongoose    = require('mongoose');
 
@@ -13,6 +14,8 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
+
+app.use(fileUpload());
 
 mongoose.connect(`mongodb+srv://${userName}:M%40rch041992M@cluster0-tbg4m.mongodb.net/test?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
