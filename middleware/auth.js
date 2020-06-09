@@ -1,9 +1,11 @@
 const jwt   = require('jsonwebtoken');
+const Promise = require('bluebird');
 
 module.exports = (req, res, next) => {
-    try {
-        const token = req.headers.authorizaton.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    Promise.try(() =>{
+        const secretKey = 'RANDOM_TOKEN_SECRET_IS_VALID';
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, secretKey);
         const userId = decodedToken.userId;
 
         if(req.body.userId && req.body.userId !== userId){
@@ -11,9 +13,5 @@ module.exports = (req, res, next) => {
         } else {
             next();
         }
-    } catch {
-        res.status(401).json({
-            error: 'Invalid request!'
-        });
-    }
+    }).catch(err => console.log(err));
 };

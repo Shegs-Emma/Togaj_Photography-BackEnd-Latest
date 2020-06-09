@@ -11,5 +11,7 @@ router.get('/', photoCtrl.fetchPhotos);
 //==================POST A PHOTOGRAPH================================
 router.post('/', auth, photoCtrl.postPhotos);
 
+//==================DELETE A PHOTOGRAPH================================
+router.delete('/:id', photoCtrl.deletePhoto);
 
 module.exports = router;

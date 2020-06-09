@@ -41,12 +41,12 @@ exports.logIn = (req, res, next) => {
                     }
                     const token = jwt.sign(
                         { userId: user._id}, 
-                        'RANDOM_TOKEN_SECRET',
-                        {expiresIn: '2h'}
+                        'RANDOM_TOKEN_SECRET_IS_VALID',
+                        {expiresIn: '1h'}
                     );
                     res.status(200).json({
                         userId: user._id,
-                        token: token,
+                        token: token
                     });
                 })
             .catch((error) => {

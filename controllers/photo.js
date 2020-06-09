@@ -20,28 +20,35 @@ exports.postPhotos = (req, res, next) => {
     };
 
     const file = req.files.file;
-    file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+    const imageCategory = req.body.imageCategory;
+    
+    file.mv(`C:/Users/user/Documents/My_React_Express_Project/Togaj_Photography/client/public/uploads/${file.name}`, err => {
         if(err){
             console.log(err);
             return res.status(500).send(err);
         }
-
-        res.json({ fileName: file.name, filePath: `/uploads/${file.name}`});
-    });
-
-    const photo = new Photo({
-        // photoUrl: url + '/images/' + req.file.filename,
-        photoFile: file,
-        imageCategory: req.body.photoDetails.imageCategory
-    });
-
-    photo.save().then(() => {
-        res.status(201).json({
-            message: 'Photo added successfully!'
+        const photo = new Photo({
+            photoUrl: `/uploads/${file.name}`,
+            imageCategory: imageCategory
         });
-    }).catch(error => {
+        photo.save();
+        res.status(201).json({ 
+            fileName: file.name, 
+            filePath: `/uploads/${file.name}`, 
+            imageCategory: imageCategory });
+    });
+};
+
+exports.deletePhoto = (req, res, next) => {
+    Photo.deleteOne({_id: req.params.id}).then(
+        () => {
+            res.status(200).json({
+                message: 'Deleted!'
+            });
+        }
+    ).catch(error => {
         res.status(400).json({
             error: error
         });
     });
-}
+};
