@@ -1,4 +1,5 @@
-const Photo = require('../models/photo');
+const Photo         = require('../models/photo'),
+    { cloudinary }  = require('../cloudinary');
 
 exports.fetchPhotos = (req, res) => {
     Photo.find().then(
@@ -12,6 +13,7 @@ exports.fetchPhotos = (req, res) => {
     });
 };
 
+
 exports.postPhotos = (req, res, next) => {
     if(req.files === null) {
         return res.status(400).json({
@@ -21,21 +23,23 @@ exports.postPhotos = (req, res, next) => {
 
     const file = req.files.file;
     const imageCategory = req.body.imageCategory;
-    
-    file.mv(`C:/Users/user/Documents/My_React_Express_Project/Togaj_Photography/client/public/uploads/${file.name}`, err => {
+
+    cloudinary.uploader.upload(file.tempFilePath, function(err, result){
         if(err){
-            console.log(err);
             return res.status(500).send(err);
         }
         const photo = new Photo({
-            photoUrl: `/uploads/${file.name}`,
+            photoUrl: result.url,
             imageCategory: imageCategory
         });
+
+        // Saving into MongoDB here and sending response to the frontend
         photo.save();
-        res.status(201).json({ 
-            fileName: file.name, 
-            filePath: `/uploads/${file.name}`, 
-            imageCategory: imageCategory });
+        res.status(201).json({
+            fileName: file.name,
+            filePath: result.url,
+            imageCategory: imageCategory
+        });
     });
 };
 

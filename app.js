@@ -7,6 +7,7 @@ const   express     = require('express'),
 const userName  = 'togaj_\photography';
 const photoRoutes = require('./routes/photo');
 const userRoutes = require('./routes/user');
+const contactRoutes = require('./routes/contact');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -15,7 +16,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(fileUpload());
+// Installed express-fileUpload and it helped me the the tempFiles path that i sent to cloudinary
+app.use(fileUpload({
+    useTempFiles: true
+}));
 
 mongoose.connect(`mongodb+srv://${userName}:M%40rch041992M@cluster0-tbg4m.mongodb.net/test?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -26,13 +30,16 @@ mongoose.connect(`mongodb+srv://${userName}:M%40rch041992M@cluster0-tbg4m.mongod
         console.error(error);
     });
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+
+//========================================MY ROUTES==========================================
 app.use('/api/photos', photoRoutes);
 
 app.use('/api/auth', userRoutes);
-//========================================MY ROUTES==========================================
 
+app.use('/api/contact', contactRoutes);
 //===========================AUth===================================================
 app.get('/api/login', (req, res, next) => {
     console.log(req.body);

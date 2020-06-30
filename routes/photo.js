@@ -4,7 +4,6 @@ const express       = require('express'),
 const photoCtrl = require('../controllers/photo');
 const auth = require('../middleware/auth');
 
-
 //===================GET A PHOTOGRAPH==================
 router.get('/', photoCtrl.fetchPhotos);
 
