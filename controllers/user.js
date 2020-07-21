@@ -3,11 +3,13 @@ const    User   = require('../models/user'),
         bcrypt  = require('bcrypt');
 
 exports.signUp = (req, res, next) => {
+    
     bcrypt.hash(req.body.password, 10).then(
         (hash) => {
             const user = new User ({
                 email: req.body.email,
-                password: hash
+                password: hash,
+                isAdmin: req.body.adminCode === '040392'
             });
             user.save().then(
                 () => {
@@ -17,7 +19,7 @@ exports.signUp = (req, res, next) => {
                 }
             ).catch((error) => {
                 res.status(500).json({
-                    error: error
+                    error: error.errors
                 })
             })
         }
@@ -27,6 +29,7 @@ exports.signUp = (req, res, next) => {
 exports.logIn = (req, res, next) => {
     User.findOne({ email: req.body.email }).then(
         (user) => {
+            
             if(!user) {
                 return res.status(401).json({
                     error: 'User does not exist'
@@ -35,7 +38,7 @@ exports.logIn = (req, res, next) => {
             bcrypt.compare(req.body.password, user.password)
                 .then((valid) => {
                     if(!valid){
-                        return res.status(401).json({
+                        return res.status(409).json({
                             error: 'Incorrect password'
                         })
                     }
@@ -46,7 +49,8 @@ exports.logIn = (req, res, next) => {
                     );
                     res.status(200).json({
                         userId: user._id,
-                        token: token
+                        token: token,
+                        isAdmin: user.isAdmin
                     });
                 })
             .catch((error) => {

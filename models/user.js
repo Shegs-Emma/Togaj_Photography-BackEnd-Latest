@@ -4,7 +4,8 @@ const mongoose          = require('mongoose'),
 //Installed the mongoose-unique-validator to allow validation before saving to the database
 const userSchema = mongoose.Schema({
     email: {type: String, required: true, unique: true},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    isAdmin: {type: Boolean, required: true}
 });
 
 userSchema.plugin(uniqueValidator);
