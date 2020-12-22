@@ -16,6 +16,7 @@ const corsOptions = {
     origin: function (origin, callback) {
         console.log("** Origin of request " + origin);
         if (whitelist.indexOf(origin) !== -1 || origin) {
+            console.log("Origin accepted")
             callback(null, true)
         } else {
             callback(new Error('Not allowed by cors'))
@@ -63,13 +64,5 @@ app.get('/api/login', (req, res, next) => {
 
 
 //================================LISTENER===========================================================
-if (process.env.NODE_ENV === 'production') {
-    //Serve any static files
-    app.use(express.static(path.join(__dirname, 'client/build')));
-
-    app.get('*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
-    })
-}
 
 module.exports = app;
