@@ -2,6 +2,7 @@ const   express     = require('express'),
         app         = express(),
         fileUpload  = require('express-fileupload'),
         bodyParser  = require('body-parser'),
+        cors        = require('cors'),
         path        = require('path'),
         mongoose    = require('mongoose');
 
@@ -9,6 +10,20 @@ const userName  = 'togaj_\photography';
 const photoRoutes = require('./routes/photo');
 const userRoutes = require('./routes/user');
 const contactRoutes = require('./routes/contact');
+
+const whitelist = ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:8080', 'https://enigmatic-eyrie-76099.herokuapp.com'];
+const corsOptions = {
+    origin: function (origin, callback) {
+        console.log("** Origin of request " + origin);
+        if (whitelist.indexOf(origin) !== -1 || origin) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by cors'))
+        }
+    }
+}
+
+app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
