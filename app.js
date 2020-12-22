@@ -15,7 +15,7 @@ const whitelist = ['http://localhost:3001', 'http://localhost:8080', 'https://en
 const corsOptions = {
     origin: function (origin, callback) {
         console.log("** Origin of request " + origin);
-        if (whitelist.indexOf(origin) !== -1 || origin) {
+        if (whitelist.indexOf(origin) !== -1 || !origin) {
             console.log("Origin accepted")
             callback(null, true)
         } else {
