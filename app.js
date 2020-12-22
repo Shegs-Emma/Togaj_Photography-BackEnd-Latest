@@ -2,6 +2,7 @@ const   express     = require('express'),
         app         = express(),
         fileUpload  = require('express-fileupload'),
         bodyParser  = require('body-parser'),
+        path        = require('path'),
         mongoose    = require('mongoose');
 
 const userName  = 'togaj_\photography';
