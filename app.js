@@ -3,7 +3,6 @@ const   express     = require('express'),
         fileUpload  = require('express-fileupload'),
         bodyParser  = require('body-parser'),
         cors        = require('cors'),
-        path        = require('path'),
         mongoose    = require('mongoose');
 
 const userName  = 'togaj_\photography';
