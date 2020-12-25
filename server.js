@@ -27,6 +27,8 @@ app.get('/*', function (req, res) {
 
 app.set('port', process.env.PORT || 3001);
 
+console.log(process.env.PORT)
+
 const server = http.createServer(app);
 
 
