@@ -3,7 +3,6 @@ const   express     = require('express'),
         fileUpload  = require('express-fileupload'),
         bodyParser  = require('body-parser'),
         cors        = require('cors'),
-        path        = require('path'),
         mongoose    = require('mongoose');
 
 const userName  = 'togaj_\photography';
@@ -38,7 +37,7 @@ app.use(fileUpload({
     useTempFiles: true
 }));
 
-let url = process.env.MONGODB_URL || `mongodb+srv://${userName}:M%40rch041992M@cluster0-tbg4m.mongodb.net/test?retryWrites=true&w=majority`;
+let url = `mongodb+srv://${userName}:M%40rch041992M@cluster0-tbg4m.mongodb.net/test?retryWrites=true&w=majority`;
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
