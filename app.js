@@ -10,7 +10,7 @@ const photoRoutes = require('./routes/photo');
 const userRoutes = require('./routes/user');
 const contactRoutes = require('./routes/contact');
 
-const whitelist = ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:8080', 'https://togaj-photography-app.herokuapp.com', 'https://enigmatic-eyrie-76099.herokuapp.com'];
+const whitelist = ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:8080', 'https://togaj-photography.herokuapp.com'];
 const corsOptions = {
     origin: function (origin, callback) {
         // console.log("** Origin of request " + origin);
