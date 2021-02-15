@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.6564ca49.chunk.css",
+    "main.css": "/static/css/main.fcdf6b0c.chunk.css",
     "main.js": "/static/js/main.567787f0.chunk.js",
     "main.js.map": "/static/js/main.567787f0.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.dc670065.js",
@@ -8,9 +8,9 @@
     "static/js/2.3311bf59.chunk.js": "/static/js/2.3311bf59.chunk.js",
     "static/js/2.3311bf59.chunk.js.map": "/static/js/2.3311bf59.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.ec8bb2c25b09d71ff274bdc9ebfde1f8.js": "/precache-manifest.ec8bb2c25b09d71ff274bdc9ebfde1f8.js",
+    "precache-manifest.8e7b65783069d81add319950297504b9.js": "/precache-manifest.8e7b65783069d81add319950297504b9.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.6564ca49.chunk.css.map": "/static/css/main.6564ca49.chunk.css.map",
+    "static/css/main.fcdf6b0c.chunk.css.map": "/static/css/main.fcdf6b0c.chunk.css.map",
     "static/js/2.3311bf59.chunk.js.LICENSE.txt": "/static/js/2.3311bf59.chunk.js.LICENSE.txt",
     "static/media/togaj.png": "/static/media/togaj.015596a0.png",
     "static/media/togaj_logo_edited.png": "/static/media/togaj_logo_edited.8f901228.png"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.dc670065.js",
     "static/js/2.3311bf59.chunk.js",
-    "static/css/main.6564ca49.chunk.css",
+    "static/css/main.fcdf6b0c.chunk.css",
     "static/js/main.567787f0.chunk.js"
   ]
 }

@@ -1,12 +1,14 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer'),
+      dotenv          = require('dotenv');
 
+dotenv.config();
+
+// This function will recieve information from the frontend form.
 exports.postRequest = (req, res) => {
-    console.log('Request Came');
     let contactDatails = req.body;
 
     try{
         sendMail(contactDatails, info => {
-            // console.log(info.messageId);
             res.status(201).send(info);
         });
     } catch (err) {
@@ -32,8 +34,8 @@ const sendMail = async (user, callback) => {
         port: 465,
         secure: true,
         auth: {
-            user: 'mightymilan04',
-            pass: 'march041992'
+            user: process.env.AUTH_USER,
+            pass: process.env.AUTH_PASS
         }, tls: {
             rejectUnauthorized: false
           }

@@ -3,9 +3,12 @@ const   express     = require('express'),
         fileUpload  = require('express-fileupload'),
         bodyParser  = require('body-parser'),
         cors        = require('cors'),
+        dotenv          = require('dotenv'),
         mongoose    = require('mongoose');
 
 const userName  = 'togaj_\photography';
+dotenv.config();
+const password = process.env.MONGO_PASS;
 const photoRoutes = require('./routes/photo');
 const userRoutes = require('./routes/user');
 const contactRoutes = require('./routes/contact');
@@ -37,7 +40,7 @@ app.use(fileUpload({
     useTempFiles: true
 }));
 
-let url = `mongodb+srv://${userName}:M%40rch041992M@cluster0-tbg4m.mongodb.net/test?retryWrites=true&w=majority`;
+let url = `mongodb+srv://${userName}:${password}@cluster0-tbg4m.mongodb.net/test?retryWrites=true&w=majority`;
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
